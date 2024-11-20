@@ -5,14 +5,14 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
+#Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "debian/buster64"
+#  config.vm.box = "debian/buster64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-   config.vm.network "private_network", ip: "192.168.27.100"
+ #  config.vm.network "private_network", ip: "192.168.27.100"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -56,14 +56,14 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  config.vm.provider "virtualbox" do |vb|
+ # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-    vb.memory = "1024"
-	vb.cpus = 2
-   end
+ #   vb.memory = "1024"
+#	vb.cpus = 2
+ #  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -75,6 +75,21 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+ # config.vm.provision :shell, :inline => "apt-get update && apt-get install -y nginx"
+ # config.vm.provision :shell, :inline => "ln -s /vagrant /usr/share/nginx/html/demo"
+#end
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network :private_network, ip: "192.168.56.100"
+  config.vm.provider :virtualbox do |vb|
+      vb.memory = 1024
+      vb.cpus = 2
+  end
   config.vm.provision :shell, :inline => "apt-get update && apt-get install -y nginx"
   config.vm.provision :shell, :inline => "ln -s /vagrant /usr/share/nginx/html/demo"
 end
